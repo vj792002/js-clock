@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Javascript Clock</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background-color: black;
+		}
+
+		#head {
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#head1 {
+			border: 5px double white;
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.time span {
+			font-size: 20px;
+			color: red;
+			font-family: 'Tektur', cursive;
+		}
+
+		#zoneTime {
+			font-family: 'Tektur', cursive;
+			color: white;
+		}
+
+		h3 {
+			border:2px solid red;
+			border-radius: 5px;
+			padding:5px;
+			text-align: center;
+			font-family: 'Tektur', cursive;
+			font-size: 15px;
+			color: white;
+		}
+
+		h2 {
+			font-family: 'Tektur', cursive;
+			font-size:15px;
+			border: 2px solid red;
+			border-radius: 5px;
+			padding: 5px;
+			color: white;
+		}
+		h5{
+			border:2px solid red;
+			border-radius: 5px;
+			padding:5px;
+		}
+		h5 span{
+			font-family: 'Tektur', cursive;
+			font-size: 13px;
+			font-weight: 600px;
+			color: white;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="head">
+		<div id="head1">
+			<h2>
+				<span>Date:<span id="date"></span></span>
+				<span>Month:<span id="month"></span></span>
+				<span>Year:<span id="year"></span></span>
+			</h2>
+			<h5>
+				<span class="time">Hours:<span id="hrs">00</span></span>
+				<span class="time">Minutes:<span id="min">00</span></span>
+				<span class="time">Sec:<span id="sec">00</span></span>
+				<span id="zoneTime"></span>
+			</h5>
+			<h3>
+				<span>Day:<span id="day"></span></span>
+			</h3>
+		</div>
+	</div>
+	<script>
+		function clock() {
+
+			let currentHrs = document.getElementById('hrs'),
+				currentZone = document.getElementById("zoneTime"),
+				currentMin = document.getElementById('min'),
+				currentSec = document.getElementById('sec'),
+				currentDay = document.getElementById('day'),
+				currentDate = document.getElementById('date'),
+				currentMonth = document.getElementById('month'),
+				currentYear = document.getElementById('year');
+
+
+			let date = new Date();
+			console.log(date);
+
+			let getDate = date.getDate();
+			let getMonth = date.getMonth();
+			let getYear = date.getFullYear();
+			let getHrs = date.getHours();
+			let getMin = date.getMinutes();
+			let getSec = date.getSeconds();
+			let getDay = date.toString().split(" ")[0];
+
+			var zone = getHrs >= 12 ? "PM" : "AM";
+
+			getHrs = getHrs ? getHrs : 12;
+
+			getHrs > 12 ? getHrs = getHrs - 12 : "";
+			if (getSec < 10) {
+				getSec = "0" + getSec;
+			}
+			if (getMin < 10) {
+				getMin = "0" + getMin;
+			}
+			if (getHrs < 10) {
+				getHrs = "0" + getHrs;
+			}
+			currentHrs.innerHTML = getHrs;
+			currentZone.innerHTML = zone;
+			currentMin.innerHTML = getMin;
+			currentSec.innerHTML = getSec;
+			currentDay.innerHTML = getDay;
+			currentDate.innerHTML = getDate;
+			currentMonth.innerHTML = getMonth;
+			currentYear.innerHTML = getYear;
+		}
+		setInterval(clock, 1000)
+	</script>
+</body>
+
+</html>
